@@ -3,7 +3,6 @@
 Game::Game(int width, int height)
 {
   window.create(VideoMode(width, height), "Plants vs. Zombies");
-  cout << width << ' ' << height << endl;
   window.setFramerateLimit(FRAME_RATE);
   state = IN_GAME;
   //player = new Player(100, 100);
@@ -13,12 +12,12 @@ Game::Game(int width, int height)
 
 
 
-  //if (!music.openFromFile(AUDIO_PATH + "bg.ogg"))
-  //{
-  //  debug("failed to load music");
-  //}
-  //music.setLoop(true);
-  //music.play();
+  // if (!music.openFromFile(AUDIO_PATH + "pvz.ogg"))
+  // {
+  //  error("failed to load music");
+  // }
+  // music.setLoop(true);
+  // music.play();
   //handler = new Handler(player);
 }
 

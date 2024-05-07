@@ -19,6 +19,7 @@ private:
     State state;
     Texture backgroundTexture;
     Sprite backgroundSprite;
+    //Music music;
     void render();
     void handle_events();
     void handle_mouse_press(Event ev);
