@@ -2,7 +2,7 @@
 
 Game::Game(int width, int height)
 {
-  window.create(VideoMode(width, height), "Plants vs. Zombies");
+  window.create(VideoMode(width, height), "Plants vs. Zombies", Style::Close);
   window.setFramerateLimit(FRAME_RATE);
   state = IN_GAME;
   //player = new Player(100, 100);
@@ -19,17 +19,40 @@ Game::Game(int width, int height)
   // music.setLoop(true);
   // music.play();
   //handler = new Handler(player);
+  handler = new Handler();
+}
+
+Game::~Game()
+{
+    //delete player;
+    delete handler;
 }
 
 void Game::run()
 {
   while (window.isOpen() and state != EXIT)
   {
-    //update();
+    update();
     render();
     handle_events();
   }
   exit(0);
+}
+
+void Game::update()
+{
+  Vector2i pos = Mouse::getPosition(window);
+  switch (state)
+  {
+  case (IN_GAME):
+    //player->update(pos);
+    handler->update();
+    break;
+  case (VICTORY_SCREEN):
+    break;
+  case (GAMEOVER_SCREEN):
+    break;
+  }
 }
 
 void Game::render()
@@ -40,7 +63,7 @@ void Game::render()
   case (IN_GAME):
     window.draw(backgroundSprite);
     // player->render(window);
-    // handler->render(window);
+    handler->render(window);
     break;
   case (VICTORY_SCREEN):
     break;

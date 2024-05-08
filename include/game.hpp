@@ -1,4 +1,9 @@
+#pragma once
+
 #include "global.hpp"
+//#include "player.hpp"
+//#include "projectile.hpp"
+#include "handler.hpp"
 
 enum State
 {
@@ -13,13 +18,16 @@ class Game
 public:
     Game(int width, int height);
     void run();
-    //~Game();
+    ~Game();
     RenderWindow window;
 private:
     State state;
     Texture backgroundTexture;
     Sprite backgroundSprite;
+    Handler* handler;
+    //Player* player
     //Music music;
+    void update();
     void render();
     void handle_events();
     void handle_mouse_press(Event ev);

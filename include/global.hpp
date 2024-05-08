@@ -5,6 +5,7 @@
 #include <SFML/System.hpp>
 #include <iostream>
 #include <vector>
+#include <random>
 
 using namespace sf;
 using namespace std;
