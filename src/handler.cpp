@@ -22,13 +22,13 @@ void Handler::update()
     //     add_projectile();
     // }
     Time zelapsed = zombie_clock.getElapsedTime();
-    if(zelapsed.asSeconds() >= 40)
+    if(zelapsed.asSeconds() >= 4)
     {
         zombie_clock.restart();
         add_zombie();
     }
     Time telapsed = titan_clock.getElapsedTime();
-    if(telapsed.asSeconds() >= 2)
+    if(telapsed.asSeconds() >= 10)
     {
         titan_clock.restart();
         add_titan();

@@ -12,12 +12,12 @@ Game::Game(int width, int height)
 
 
 
-  // if (!music.openFromFile(AUDIO_PATH + "pvz.ogg"))
-  // {
-  //  error("failed to load music");
-  // }
-  // music.setLoop(true);
-  // music.play();
+  if (!music.openFromFile(AUDIO_PATH + "pvz.ogg"))
+  {
+   error("failed to load music");
+  }
+  music.setLoop(true);
+  music.play();
   //handler = new Handler(player);
   handler = new Handler();
 }

@@ -26,7 +26,7 @@ private:
     Sprite backgroundSprite;
     Handler* handler;
     //Player* player
-    //Music music;
+    Music music;
     void update();
     void render();
     void handle_events();
