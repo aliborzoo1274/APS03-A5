@@ -22,15 +22,23 @@ void Handler::update()
     //     add_projectile();
     // }
     Time zelapsed = zombie_clock.getElapsedTime();
-    if(zelapsed.asSeconds() >= 4)
+    if(zelapsed.asSeconds() >= 40)
     {
         zombie_clock.restart();
         add_zombie();
+    }
+    Time telapsed = titan_clock.getElapsedTime();
+    if(telapsed.asSeconds() >= 2)
+    {
+        titan_clock.restart();
+        add_titan();
     }
     // for(auto p : projectiles)
     //     p->update();
     for(auto z : zombies)
         z->update();
+    for(auto t : titans)
+        t->update();
     //delete_out_of_bounds();
     //handle_collision();
 }
@@ -56,6 +64,8 @@ void Handler::render(RenderWindow &window)
     //     p->render(window);
     for(auto z : zombies)
         z->render(window);
+    for(auto t : titans)
+        t->render(window);
 }
 
 // void Handler::add_projectile()
@@ -66,10 +76,18 @@ void Handler::render(RenderWindow &window)
 
 void Handler::add_zombie()
 {
-    uniform_int_distribution<int> dist(1, 5);
+    uniform_int_distribution<int> dist(0, 4);
     int random_number = dist(rng);
-    Zombie* z = new Zombie(Vector2f(WIDTH, random_number * 100 - 70));
+    Zombie* z = new Zombie(Vector2f(WIDTH, random_number * 100 + 30));
     zombies.push_back(z);
+}
+
+void Handler::add_titan()
+{
+    uniform_int_distribution<int> dist(0, 4);
+    int random_number = dist(rng);
+    Titan* t = new Titan(Vector2f(WIDTH, random_number * 100 - 44));
+    titans.push_back(t);
 }
 
 // void Handler::handle_collision(){
