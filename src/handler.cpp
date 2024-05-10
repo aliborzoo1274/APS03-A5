@@ -33,12 +33,20 @@ void Handler::update()
         titan_clock.restart();
         add_titan();
     }
+    Time selapsed = sun_clock.getElapsedTime();
+    if(selapsed.asSeconds() >= 6)
+    {
+        sun_clock.restart();
+        add_sun(Vector2f(0, 0));
+    }
     // for(auto p : projectiles)
     //     p->update();
     for(auto z : zombies)
         z->update();
     for(auto t : titans)
         t->update();
+    for(auto s : suns)
+        s->update();
     //delete_out_of_bounds();
     //handle_collision();
 }
@@ -66,6 +74,9 @@ void Handler::render(RenderWindow &window)
         z->render(window);
     for(auto t : titans)
         t->render(window);
+    for(auto s : suns)
+        s->render(window);
+    //score.render(window);
 }
 
 // void Handler::add_projectile()
@@ -88,6 +99,22 @@ void Handler::add_titan()
     int random_number = dist(rng);
     Titan* t = new Titan(Vector2f(WIDTH, random_number * 100 - 44));
     titans.push_back(t);
+}
+
+void Handler::add_sun(Vector2f pos)
+{
+    if (pos.x == 0)
+    {
+        uniform_int_distribution<int> dist(1, 8);
+        int random_number = dist(rng);
+        Sun* s = new Sun(Vector2f(random_number * 100, 0), 0.5);
+        suns.push_back(s);
+    }
+    else
+    {
+        Sun* s = new Sun(pos, 0);
+        suns.push_back(s);
+    }
 }
 
 // void Handler::handle_collision(){
@@ -116,3 +143,21 @@ void Handler::add_titan()
 //         delete z;
 //     }
 // }
+
+void Handler::handle_mouse_press(Vector2i pos)
+{
+    vector <Sun*> trashs;
+    for (auto s : suns)
+    {
+        if (s->is_in_mouse_pos(pos))
+        {
+            trashs.push_back(s);
+            //score.update();
+        }
+    }
+    for(auto s : trashs)
+    {
+        suns.erase(remove(suns.begin(), suns.end(), s), suns.end());
+        delete s;
+    }
+}

@@ -9,9 +9,6 @@ Game::Game(int width, int height)
   if (!backgroundTexture.loadFromFile(PICS_PATH + "bg.png"))
     error("failed to load image");
   backgroundSprite.setTexture(backgroundTexture);
-
-
-
   if (!music.openFromFile(AUDIO_PATH + "pvz.ogg"))
   {
    error("failed to load music");
@@ -104,6 +101,7 @@ void Game::handle_mouse_press(Event ev)
   switch (state) {
   case (IN_GAME):
     //player->handle_mouse_press(pos);
+    handler->handle_mouse_press(pos);
     break;
   case (VICTORY_SCREEN):
     break;
