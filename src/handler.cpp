@@ -76,7 +76,7 @@ void Handler::render(RenderWindow &window)
         t->render(window);
     for(auto s : suns)
         s->render(window);
-    //score.render(window);
+    score.render(window);
 }
 
 // void Handler::add_projectile()
@@ -152,7 +152,7 @@ void Handler::handle_mouse_press(Vector2i pos)
         if (s->is_in_mouse_pos(pos))
         {
             trashs.push_back(s);
-            //score.update();
+            score.update();
         }
     }
     for(auto s : trashs)

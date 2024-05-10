@@ -7,7 +7,7 @@
 #include "zombie.hpp"
 #include "titan.hpp"
 #include "sunrise.hpp"
-//#include "score.hpp"
+#include "score.hpp"
 
 class Handler
 {
@@ -23,7 +23,7 @@ private:
     Settings game_settings = settings();
     mt19937 rng;
     Clock clock, zombie_clock, titan_clock, sun_clock;
-    //Score score;
+    Score score;
     //Player* player;
     //vector <Projectile*> projectiles;
     vector <Zombie*> zombies;
