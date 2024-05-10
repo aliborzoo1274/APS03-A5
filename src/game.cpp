@@ -98,7 +98,8 @@ void Game::handle_mouse_press(Event ev)
   if (ev.mouseButton.button == Mouse::Right)
     return;
   Vector2i pos = {ev.mouseButton.x, ev.mouseButton.y};
-  switch (state) {
+  switch (state)
+  {
   case (IN_GAME):
     //player->handle_mouse_press(pos);
     handler->handle_mouse_press(pos);
@@ -114,7 +115,8 @@ void Game::handle_mouse_release(Event ev) {
   if (ev.mouseButton.button == Mouse::Right)
     return;
   Vector2i pos = {ev.mouseButton.x, ev.mouseButton.y};
-  switch (state) {
+  switch (state)
+  {
   case (IN_GAME):
     //player->handle_mouse_release(pos);
     break;

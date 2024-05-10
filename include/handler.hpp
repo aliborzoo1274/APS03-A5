@@ -1,6 +1,7 @@
 #pragma once
 
 #include "global.hpp"
+#include "settings.hpp"
 //#include "player.hpp"
 //#include "projectile.hpp"
 #include "zombie.hpp"
@@ -19,6 +20,7 @@ public:
     void render(RenderWindow &window);
     void handle_mouse_press(Vector2i pos);
 private:
+    Settings game_settings = settings();
     mt19937 rng;
     Clock clock, zombie_clock, titan_clock, sun_clock;
     //Score score;

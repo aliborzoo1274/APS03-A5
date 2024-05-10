@@ -34,7 +34,7 @@ void Handler::update()
         add_titan();
     }
     Time selapsed = sun_clock.getElapsedTime();
-    if(selapsed.asSeconds() >= 6)
+    if(selapsed.asSeconds() >= game_settings.Sun[1])
     {
         sun_clock.restart();
         add_sun(Vector2f(0, 0));
@@ -107,7 +107,7 @@ void Handler::add_sun(Vector2f pos)
     {
         uniform_int_distribution<int> dist(1, 8);
         int random_number = dist(rng);
-        Sun* s = new Sun(Vector2f(random_number * 100, 0), 0.5);
+        Sun* s = new Sun(Vector2f(random_number * 100, 0), game_settings.Sun[0]);
         suns.push_back(s);
     }
     else
