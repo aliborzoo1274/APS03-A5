@@ -8,6 +8,9 @@
 #include "titan.hpp"
 #include "sunrise.hpp"
 #include "score.hpp"
+#include "board.hpp"
+#include "plant.hpp"
+#include "peashooter.hpp"
 
 class Handler
 {
@@ -19,16 +22,21 @@ public:
     void update();
     void render(RenderWindow &window);
     void handle_mouse_press(Vector2i pos);
+    void handle_pressing_sun(Vector2i pos);
+    void handle_pressing_plant(Vector2i pos);
 private:
     Settings game_settings = settings();
     mt19937 rng;
     Clock clock, zombie_clock, titan_clock, sun_clock;
     Score score;
+    Board board;
+    bool mouse_clicked = true;
     //Player* player;
     //vector <Projectile*> projectiles;
     vector <Zombie*> zombies;
     vector <Titan*> titans;
     vector<Sun*> suns;
+    vector<Plant*> plants;
     //void add_projectile();
     //void delete_out_of_bounds();
     void add_zombie();

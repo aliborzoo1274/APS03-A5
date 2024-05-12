@@ -74,9 +74,12 @@ void Handler::render(RenderWindow &window)
         z->render(window);
     for(auto t : titans)
         t->render(window);
+    board.render(window);
+    score.render(window);
+    for(auto p : plants)
+        p->render(window);
     for(auto s : suns)
         s->render(window);
-    score.render(window);
 }
 
 // void Handler::add_projectile()
@@ -146,6 +149,12 @@ void Handler::add_sun(Vector2f pos)
 
 void Handler::handle_mouse_press(Vector2i pos)
 {
+    handle_pressing_sun(pos);
+    handle_pressing_plant(pos);
+}
+
+void Handler::handle_pressing_sun(Vector2i pos)
+{
     vector <Sun*> trashs;
     for (auto s : suns)
     {
@@ -159,5 +168,22 @@ void Handler::handle_mouse_press(Vector2i pos)
     {
         suns.erase(remove(suns.begin(), suns.end(), s), suns.end());
         delete s;
+    }
+}
+
+void Handler::handle_pressing_plant(Vector2i pos)
+{
+    if (board.is_in_mouse_pos(pos))
+    {
+        if(mouse_clicked)
+        {
+            plants.push_back(board.what_is_in_mouse_pos(pos));
+            mouse_clicked = false;
+        }
+    }
+    else if (!mouse_clicked)
+    {
+        plants[plants.size() - 1]->set_pos(pos);
+        mouse_clicked = true;
     }
 }

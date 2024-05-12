@@ -6,7 +6,6 @@ Titan::Titan(Vector2f p)
     if (!texture.loadFromFile(PICS_PATH + "titan.png"))
         error("failed to load titan texture");
     sprite.setTexture(texture);
-    sprite.setScale(0.13f, 0.13f);
 }
 
 //Titan::~Titan(){}
