@@ -4,7 +4,7 @@ void Score::render(RenderWindow &window)
 {
     Font font;
     if (!font.loadFromFile(FONTS_PATH + "Digital-Serial-ExtraBold Regular.ttf"))
-        error("failed to load font");
+        error("failed to load Digital-Serial-ExtraBold Regular font");
     score_text.setFont(font);
     score_text.setCharacterSize(20);
     score_text.setFillColor(Color::Black);
@@ -13,7 +13,12 @@ void Score::render(RenderWindow &window)
     window.draw(score_text);
 }
 
-void Score::update()
+void Score::increase()
 {
     score_value += SCORE_INCREASE;
+}
+
+void Score::decrease(float plant_price)
+{
+    score_value -= plant_price;
 }

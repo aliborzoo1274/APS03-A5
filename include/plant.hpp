@@ -5,11 +5,14 @@
 class Plant
 {
 public:
-    Plant(vector<float> settings);
-    virtual void set_pos(Vector2i pos) = 0;
-    virtual void render(RenderWindow &window) = 0;
+    Plant(string plant_name, Vector2i pos, vector<float> settings);
+    void set_pos(Vector2i pos);
+    void render(RenderWindow &window);
 private:
     //Clock clock;
+    Texture texture;
+    Sprite sprite;
+    Vector2f pos;
     float damage, health, cooldown;
     float hitrate, speed, price;
 };

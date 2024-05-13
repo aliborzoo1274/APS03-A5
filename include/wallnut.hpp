@@ -6,12 +6,6 @@
 class Wallnut : public Plant
 {
 public:
-    Wallnut(Vector2i pos, vector<float> settings);
-    void set_pos(Vector2i pos);
-    void render(RenderWindow &window);
+    Wallnut(string plant_name, Vector2i pos, vector<float> settings);
     //~Wallnut();
-private:
-    Texture texture;
-    Sprite sprite;
-    Vector2f pos;
 };

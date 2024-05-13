@@ -6,12 +6,6 @@
 class Sunflower : public Plant
 {
 public:
-    Sunflower(Vector2i pos, vector<float> settings);
-    void set_pos(Vector2i pos);
-    void render(RenderWindow &window);
+    Sunflower(string plant_name, Vector2i pos, vector<float> settings);
     //~Sunflower();
-private:
-    Texture texture;
-    Sprite sprite;
-    Vector2f pos;
 };

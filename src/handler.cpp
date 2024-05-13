@@ -47,6 +47,7 @@ void Handler::update()
         t->update();
     for(auto s : suns)
         s->update();
+    board.update();
     //delete_out_of_bounds();
     //handle_collision();
 }
@@ -70,14 +71,13 @@ void Handler::render(RenderWindow &window)
 {
     // for(auto p : projectiles)
     //     p->render(window);
-    for(auto z : zombies)
-        z->render(window);
-    for(auto t : titans)
-        t->render(window);
-    board.render(window);
-    score.render(window);
+    board.render_board(window);
     for(auto p : plants)
         p->render(window);
+    for(auto t : titans)
+        t->render(window);
+    for(auto z : zombies)
+        z->render(window);
     for(auto s : suns)
         s->render(window);
 }
@@ -161,7 +161,7 @@ void Handler::handle_pressing_sun(Vector2i pos)
         if (s->is_in_mouse_pos(pos))
         {
             trashs.push_back(s);
-            score.update();
+            board.increase_score();
         }
     }
     for(auto s : trashs)
@@ -175,7 +175,7 @@ void Handler::handle_pressing_plant(Vector2i pos)
 {
     if (board.is_in_mouse_pos(pos))
     {
-        if(mouse_clicked)
+        if(mouse_clicked && board.what_is_in_mouse_pos(pos) != nullptr)
         {
             plants.push_back(board.what_is_in_mouse_pos(pos));
             mouse_clicked = false;

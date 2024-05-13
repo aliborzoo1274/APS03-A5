@@ -6,12 +6,6 @@
 class Snowpeashooter : public Plant
 {
 public:
-    Snowpeashooter(Vector2i pos, vector<float> settings);
-    void set_pos(Vector2i pos);
-    void render(RenderWindow &window);
+    Snowpeashooter(string plant_name, Vector2i pos, vector<float> settings);
     //~Snowpeashooter();
-private:
-    Texture texture;
-    Sprite sprite;
-    Vector2f pos;
 };

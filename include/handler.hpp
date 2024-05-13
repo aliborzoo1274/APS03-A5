@@ -7,7 +7,6 @@
 #include "zombie.hpp"
 #include "titan.hpp"
 #include "sunrise.hpp"
-#include "score.hpp"
 #include "board.hpp"
 #include "plant.hpp"
 #include "peashooter.hpp"
@@ -28,7 +27,6 @@ private:
     Settings game_settings = settings();
     mt19937 rng;
     Clock clock, zombie_clock, titan_clock, sun_clock;
-    Score score;
     Board board;
     bool mouse_clicked = true;
     //Player* player;
