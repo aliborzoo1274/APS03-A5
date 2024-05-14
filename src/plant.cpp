@@ -20,11 +20,13 @@ Plant::Plant(string plant_name, Vector2i pos, vector<float> settings)
 
 void Plant::set_pos(Vector2i pos)
 {
-    Vector2f mouse_pos = Vector2f(pos);
+    //Vector2f mouse_pos = Vector2f(pos);
     // give pos
     // in what tile
     // that tile will be full
-    sprite.setPosition(mouse_pos);
+    // sprite.setPosition(mouse_pos);
+    tile = tile->which_tile(pos);
+    sprite.setPosition(tile->get_center_of_tile());
 }
 
 void Plant::render(RenderWindow &window)

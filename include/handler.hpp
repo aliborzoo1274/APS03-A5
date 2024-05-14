@@ -35,6 +35,7 @@ private:
     vector <Titan*> titans;
     vector<Sun*> suns;
     vector<Plant*> plants;
+    vector<Tile*> tiles;
     //void add_projectile();
     //void delete_out_of_bounds();
     void add_zombie();

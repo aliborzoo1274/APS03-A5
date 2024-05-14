@@ -16,7 +16,12 @@ using namespace std;
 const int WIDTH = 912;
 const int HEIGHT = 600;
 const int FRAME_RATE = 144;
-const int SCORE_INCREASE = 25;
+const int SCORE_INCREASE = 1000;
+
+const float tile_height = 95;
+const float tile_width = 80;
+
+const Vector2f top_left_corner_of_ground = {135, 95};
 
 const char FIRST_DELIM = ',';
 const char SECOND_DELIM = '-';

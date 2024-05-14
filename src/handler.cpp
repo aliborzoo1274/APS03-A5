@@ -48,6 +48,8 @@ void Handler::update()
     for(auto s : suns)
         s->update();
     board.update();
+    for(auto p : plants)
+        p->update();
     //delete_out_of_bounds();
     //handle_collision();
 }
@@ -74,10 +76,10 @@ void Handler::render(RenderWindow &window)
     board.render_board(window);
     for(auto p : plants)
         p->render(window);
-    for(auto t : titans)
-        t->render(window);
-    for(auto z : zombies)
-        z->render(window);
+    // for(auto t : titans)
+    //     t->render(window);
+    // for(auto z : zombies)
+    //     z->render(window);
     for(auto s : suns)
         s->render(window);
 }
@@ -183,7 +185,22 @@ void Handler::handle_pressing_plant(Vector2i pos)
     }
     else if (!mouse_clicked)
     {
+        Tile* tile;
+        tile = tile->which_tile(pos);
+        if (pos.x < top_left_corner_of_ground.x ||
+            pos.x > (top_left_corner_of_ground.x + 9 * tile_width) ||
+            pos.y < top_left_corner_of_ground.y ||
+            pos.y > (top_left_corner_of_ground.y + 5 * tile_height))
+                return;
+        for (auto t : tiles)
+        {
+            if (t->get_center_of_tile().x == tile->get_center_of_tile().x &&
+                t->get_center_of_tile().y == tile->get_center_of_tile().y &&
+                t->full_of_plant) return;
+        }
         plants[plants.size() - 1]->set_pos(pos);
+        tiles.push_back(plants[plants.size() - 1]->get_tile());
+        tiles[tiles.size() - 1]->full_of_plant = true;
         mouse_clicked = true;
     }
 }
