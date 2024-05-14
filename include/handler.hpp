@@ -13,6 +13,8 @@
 #include "snowpeashooter.hpp"
 #include "sunflower.hpp"
 #include "wallnut.hpp"
+#include "pea.hpp"
+#include "snowpea.hpp"
 
 class Handler
 {
@@ -29,18 +31,20 @@ public:
 private:
     Settings game_settings = settings();
     mt19937 rng;
-    Clock clock, zombie_clock, titan_clock, sun_clock;
+    Clock pea_clock, snowpea_clock, zombie_clock, titan_clock, sun_clock;
     Board board;
     bool mouse_clicked = true;
     //Player* player;
-    //vector <Projectile*> projectiles;
     vector <Zombie*> zombies;
     vector <Titan*> titans;
     vector<Sun*> suns;
     vector<Plant*> plants;
     vector<Tile*> tiles;
-    //void add_projectile();
-    //void delete_out_of_bounds();
+    vector<Pea*> peas;
+    vector<Snowpea*> snowpeas;
+    void add_pea();
+    void add_snowpea();
+    void delete_out_of_bounds();
     void add_zombie();
     void add_titan();
     void add_sun(Vector2f pos);

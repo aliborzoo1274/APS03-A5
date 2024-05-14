@@ -10,9 +10,7 @@ Game::Game(int width, int height)
     error("failed to load image");
   backgroundSprite.setTexture(backgroundTexture);
   if (!music.openFromFile(AUDIO_PATH + "pvz.ogg"))
-  {
    error("failed to load music");
-  }
   music.setLoop(true);
   music.play();
   //handler = new Handler(player);
@@ -84,9 +82,6 @@ void Game::handle_events()
     case (Event::MouseButtonPressed):
       handle_mouse_press(event);
       break;
-    case (Event::MouseButtonReleased):
-      handle_mouse_release(event);
-      break;
     default:
       break;
     }
@@ -104,22 +99,6 @@ void Game::handle_mouse_press(Event ev)
     //player->handle_mouse_press(pos);
     //cout << pos.x << ' ' << pos.y << endl;
     handler->handle_mouse_press(pos);
-    break;
-  case (VICTORY_SCREEN):
-    break;
-  case (GAMEOVER_SCREEN):
-    break;
-  }
-}
-
-void Game::handle_mouse_release(Event ev) {
-  if (ev.mouseButton.button == Mouse::Right)
-    return;
-  Vector2i pos = {ev.mouseButton.x, ev.mouseButton.y};
-  switch (state)
-  {
-  case (IN_GAME):
-    //player->handle_mouse_release(pos);
     break;
   case (VICTORY_SCREEN):
     break;

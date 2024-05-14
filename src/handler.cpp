@@ -15,20 +15,26 @@
 
 void Handler::update()
 {
-    // Time elapsed = clock.getElapsedTime();
-    // if(elapsed.asMilliseconds() >= 600)
-    // {
-    //     clock.restart();
-    //     add_projectile();
-    // }
+    Time pelapsed = pea_clock.getElapsedTime();
+    if(pelapsed.asSeconds() >= game_settings.Peashooter[3])
+    {
+        pea_clock.restart();
+        add_pea();
+    }
+    Time snpelapsed = snowpea_clock.getElapsedTime();
+    if(snpelapsed.asSeconds() >= game_settings.SnowPeashooter[3])
+    {
+        snowpea_clock.restart();
+        add_snowpea();
+    }
     Time zelapsed = zombie_clock.getElapsedTime();
-    if(zelapsed.asSeconds() >= 4)
+    if(zelapsed.asSeconds() >= 3)
     {
         zombie_clock.restart();
         add_zombie();
     }
     Time telapsed = titan_clock.getElapsedTime();
-    if(telapsed.asSeconds() >= 10)
+    if(telapsed.asSeconds() >= 5)
     {
         titan_clock.restart();
         add_titan();
@@ -39,8 +45,10 @@ void Handler::update()
         sun_clock.restart();
         add_sun(Vector2f(0, 0));
     }
-    // for(auto p : projectiles)
-    //     p->update();
+    for(auto p : peas)
+        p->update();
+    for(auto s : snowpeas)
+        s->update();
     for(auto z : zombies)
         z->update();
     for(auto t : titans)
@@ -60,45 +68,77 @@ void Handler::update()
                 add_sun(sun_pos);
         }
     }
-    //delete_out_of_bounds();
+    delete_out_of_bounds();
     //handle_collision();
 }
 
-// void Handler::delete_out_of_bounds()
-// {
-//     vector <Projectile*> trash;
-//     for(auto p : projectiles){
-//         if(p->is_out()){
-//             trash.push_back(p);
-//         }
-//     }
-//     projectiles.erase(remove_if(projectiles.begin(), projectiles.end(), 
-//         [](auto p){ return p->is_out(); }), projectiles.end());
-//     for (auto p : trash){
-//         delete p;
-//     }
-// }
+void Handler::delete_out_of_bounds()
+{
+    vector <Pea*> p_trash;
+    for(auto p : peas)
+    {
+        if(p->is_out())
+            p_trash.push_back(p);
+    }
+    peas.erase(remove_if(peas.begin(), peas.end(), 
+        [](auto p){ return p->is_out(); }), peas.end());
+    for (auto p : p_trash)
+        delete p;
+
+    vector <Snowpea*> s_trash;
+    for(auto s : snowpeas)
+    {
+        if(s->is_out())
+            s_trash.push_back(s);
+    }
+    snowpeas.erase(remove_if(snowpeas.begin(), snowpeas.end(), 
+        [](auto s){ return s->is_out(); }), snowpeas.end());
+    for (auto s : s_trash)
+        delete s;
+}
 
 void Handler::render(RenderWindow &window)
 {
-    // for(auto p : projectiles)
-    //     p->render(window);
     board.render_board(window);
     for(auto p : plants)
         p->render(window);
-    // for(auto t : titans)
-    //     t->render(window);
-    // for(auto z : zombies)
-    //     z->render(window);
+    for(auto p : peas)
+        p->render(window);
+    for(auto s : snowpeas)
+        s->render(window);
+    for(auto t : titans)
+        t->render(window);
+    for(auto z : zombies)
+        z->render(window);
     for(auto s : suns)
         s->render(window);
 }
 
-// void Handler::add_projectile()
-// {
-//     Projectile* p = new Projectile(player->get_projectile_pos());
-//     projectiles.push_back(p);
-// }
+void Handler::add_pea()
+{
+    for(auto p : plants)
+    {
+        Peashooter* peashooter = dynamic_cast<Peashooter*>(p);
+        if (peashooter != nullptr)
+        {
+            Pea* pea = new Pea(peashooter->get_pea_pos());
+            peas.push_back(pea);
+        }
+    }
+}
+
+void Handler::add_snowpea()
+{
+    for(auto p : plants)
+    {
+        Snowpeashooter* snowpeashooter = dynamic_cast<Snowpeashooter*>(p);
+        if (snowpeashooter != nullptr)
+        {
+            Snowpea* snowpea = new Snowpea(snowpeashooter->get_snowpea_pos());
+            snowpeas.push_back(snowpea);
+        }
+    }
+}
 
 void Handler::add_zombie()
 {
