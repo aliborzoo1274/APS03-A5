@@ -14,22 +14,22 @@ Tile* Tile::which_tile(Vector2i mouse_pos)
 {
     Tile* tile = nullptr;
     Vector2f pos;
-    pos.x = top_left_corner_of_ground.x;
-    pos.y = top_left_corner_of_ground.y;
+    pos.x = TOP_LEFT_CORNER_OF_GROUND.x;
+    pos.y = TOP_LEFT_CORNER_OF_GROUND.y;
     for (int x = 1; x <= 5; x++)
     {
         for (int y = 1; y <= 9; y++)
         {
-            if (mouse_pos.x > pos.x && mouse_pos.x < (pos.x + tile_width) &&
-            mouse_pos.y > pos.y && mouse_pos.y < (pos.y + tile_height))
+            if (mouse_pos.x > pos.x && mouse_pos.x < (pos.x + TILE_WIDTH) &&
+            mouse_pos.y > pos.y && mouse_pos.y < (pos.y + TILE_HEIGHT))
             {
-                tile = new Tile(x, y, {pos.x, pos.y}, {(pos.x + tile_width), (pos.y + tile_height)});
+                tile = new Tile(x, y, {pos.x, pos.y}, {(pos.x + TILE_WIDTH), (pos.y + TILE_HEIGHT)});
                 return tile;
             }
-            pos.x += tile_width;
+            pos.x += TILE_WIDTH;
         }
-        pos.x = top_left_corner_of_ground.x;
-        pos.y += tile_height;
+        pos.x = TOP_LEFT_CORNER_OF_GROUND.x;
+        pos.y += TILE_HEIGHT;
     }
 }
 

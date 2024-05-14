@@ -18,15 +18,16 @@ Plant::Plant(string plant_name, Vector2i pos, vector<float> settings)
     price = settings[5];
 }
 
-void Plant::set_pos(Vector2i pos)
+void Plant::set_position(Vector2i position)
 {
     //Vector2f mouse_pos = Vector2f(pos);
     // give pos
     // in what tile
     // that tile will be full
     // sprite.setPosition(mouse_pos);
-    tile = tile->which_tile(pos);
+    tile = tile->which_tile(position);
     sprite.setPosition(tile->get_center_of_tile());
+    pos = sprite.getPosition();
 }
 
 void Plant::render(RenderWindow &window)

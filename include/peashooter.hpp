@@ -8,4 +8,5 @@ class Peashooter : public Plant
 public:
     Peashooter(string plant_name, Vector2i pos, vector<float> settings);
     //~Peashooter();
+    void update();
 };

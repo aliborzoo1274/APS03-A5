@@ -10,6 +10,9 @@
 #include "board.hpp"
 #include "plant.hpp"
 #include "peashooter.hpp"
+#include "snowpeashooter.hpp"
+#include "sunflower.hpp"
+#include "wallnut.hpp"
 
 class Handler
 {

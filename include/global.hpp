@@ -17,11 +17,12 @@ const int WIDTH = 912;
 const int HEIGHT = 600;
 const int FRAME_RATE = 144;
 const int SCORE_INCREASE = 1000;
+const int SUNFLOWER_SUN_MAKE_TIME = 4;
 
-const float tile_height = 95;
-const float tile_width = 80;
+const float TILE_HEIGHT = 95;
+const float TILE_WIDTH = 80;
 
-const Vector2f top_left_corner_of_ground = {135, 95};
+const Vector2f TOP_LEFT_CORNER_OF_GROUND = {135, 95};
 
 const char FIRST_DELIM = ',';
 const char SECOND_DELIM = '-';

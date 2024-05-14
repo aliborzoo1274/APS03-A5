@@ -81,7 +81,7 @@ Plant* Board::what_is_in_mouse_pos(Vector2i mouse_pos)
     {
         if(peash_card_type == "peashootercard_useless")
             return nullptr;
-        Peashooter* peashooter = new Peashooter("peashooter", mouse_pos, game_settings.Peashooter);
+        Plant* peashooter = new Peashooter("peashooter", mouse_pos, game_settings.Peashooter);
         if (first_method_call_fixer % 2)
         {
             score.decrease(game_settings.Peashooter[5]);
@@ -96,7 +96,7 @@ Plant* Board::what_is_in_mouse_pos(Vector2i mouse_pos)
     {
         if(snpea_card_type == "snowpeashootercard_useless")
             return nullptr;
-        Snowpeashooter* snowpeashooter = new Snowpeashooter("snowpeashooter", mouse_pos, game_settings.SnowPeashooter);
+        Plant* snowpeashooter = new Snowpeashooter("snowpeashooter", mouse_pos, game_settings.SnowPeashooter);
         if (first_method_call_fixer % 2)
         {
             score.decrease(game_settings.SnowPeashooter[5]);
@@ -111,7 +111,7 @@ Plant* Board::what_is_in_mouse_pos(Vector2i mouse_pos)
     {
         if(sunfl_card_type == "sunflowercard_useless")
             return nullptr;
-        Sunflower* sunflower = new Sunflower("sunflower", mouse_pos, game_settings.Sunflower);
+        Plant* sunflower = new Sunflower("sunflower", mouse_pos, game_settings.Sunflower);
         if (first_method_call_fixer % 2)
         {
             score.decrease(game_settings.Sunflower[5]);
@@ -126,7 +126,7 @@ Plant* Board::what_is_in_mouse_pos(Vector2i mouse_pos)
     {
         if(w_card_type == "wallnutcard_useless")
             return nullptr;
-        Wallnut* wallnut = new Wallnut("wall-nut", mouse_pos, game_settings.Wallnut);
+        Plant* wallnut = new Wallnut("wall-nut", mouse_pos, game_settings.Wallnut);
         if (first_method_call_fixer % 2)
         {
             score.decrease(game_settings.Wallnut[5]);

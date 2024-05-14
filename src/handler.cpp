@@ -48,8 +48,18 @@ void Handler::update()
     for(auto s : suns)
         s->update();
     board.update();
+    // for(auto p : plants)
+    //     p->update();
     for(auto p : plants)
-        p->update();
+    {
+        Sunflower* sunflower = dynamic_cast<Sunflower*>(p);
+        if (sunflower != nullptr)
+        {
+            Vector2f sun_pos = sunflower->make_sun();
+            if(sun_pos.x != 0)
+                add_sun(sun_pos);
+        }
+    }
     //delete_out_of_bounds();
     //handle_collision();
 }
@@ -187,10 +197,10 @@ void Handler::handle_pressing_plant(Vector2i pos)
     {
         Tile* tile;
         tile = tile->which_tile(pos);
-        if (pos.x < top_left_corner_of_ground.x ||
-            pos.x > (top_left_corner_of_ground.x + 9 * tile_width) ||
-            pos.y < top_left_corner_of_ground.y ||
-            pos.y > (top_left_corner_of_ground.y + 5 * tile_height))
+        if (pos.x < TOP_LEFT_CORNER_OF_GROUND.x ||
+            pos.x > (TOP_LEFT_CORNER_OF_GROUND.x + 9 * TILE_WIDTH) ||
+            pos.y < TOP_LEFT_CORNER_OF_GROUND.y ||
+            pos.y > (TOP_LEFT_CORNER_OF_GROUND.y + 5 * TILE_HEIGHT))
                 return;
         for (auto t : tiles)
         {
@@ -198,7 +208,7 @@ void Handler::handle_pressing_plant(Vector2i pos)
                 t->get_center_of_tile().y == tile->get_center_of_tile().y &&
                 t->full_of_plant) return;
         }
-        plants[plants.size() - 1]->set_pos(pos);
+        plants[plants.size() - 1]->set_position(pos);
         tiles.push_back(plants[plants.size() - 1]->get_tile());
         tiles[tiles.size() - 1]->full_of_plant = true;
         mouse_clicked = true;
