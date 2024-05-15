@@ -5,7 +5,7 @@
 //#include "player.hpp"
 //#include "projectile.hpp"
 #include "zombie.hpp"
-#include "titan.hpp"
+//#include "titan.hpp"
 #include "sun.hpp"
 #include "board.hpp"
 #include "plant.hpp"
@@ -31,12 +31,19 @@ public:
 private:
     Settings game_settings = settings();
     mt19937 rng;
-    Clock pea_clock, snowpea_clock, zombie_clock, titan_clock, sun_clock;
+    Clock game_clock, pea_clock, snowpea_clock;
+    Clock zombie_clock, titan_clock, sun_clock;
+    float game_total_time = game_settings.Attack[0];
+    float time_of_each_round = game_settings.Attack[1];
+    float num_of_attackers_in_first_round = game_settings.Attack[2];
+    float num_of_added_attackers = game_settings.Attack[3];
     Board board;
     bool mouse_clicked = true;
     //Player* player;
     vector <Zombie*> zombies;
-    vector <Titan*> titans;
+    int num_of_total_zombies = 0;
+    int num_of_dead_zombies = 0;
+    //vector <Titan*> titans;
     vector<Sun*> suns;
     vector<Plant*> plants;
     vector<Tile*> tiles;
@@ -46,7 +53,7 @@ private:
     void add_snowpea();
     void delete_out_of_bounds();
     void add_zombie();
-    void add_titan();
+    //void add_titan();
     void add_sun(Vector2f pos);
     void handle_collision();
     void handle_collision_of_zombie_and_projectile();

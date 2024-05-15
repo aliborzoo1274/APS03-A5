@@ -9,6 +9,7 @@
 #include <random>
 #include <fstream>
 #include <sstream>
+#include <cmath>
 
 using namespace sf;
 using namespace std;

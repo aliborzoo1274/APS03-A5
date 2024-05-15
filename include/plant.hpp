@@ -12,6 +12,8 @@ public:
     void render(RenderWindow &window);
     Tile* get_tile() {return tile;}
     FloatRect get_rect();
+    void is_being_eaten(float impact);
+    float get_health() {return health;}
 private:
     //Clock clock;
     Texture texture;

@@ -37,5 +37,15 @@ void Plant::render(RenderWindow &window)
 
 FloatRect Plant::get_rect()
 {
-    return sprite.getGlobalBounds();
+    float width = sprite.getGlobalBounds().width / 3.f;
+    float height = sprite.getGlobalBounds().height / 3.f;
+    float left = sprite.getGlobalBounds().left + width;
+    float top = sprite.getGlobalBounds().top + height;
+    FloatRect bounds(left, top, width, height);
+    return bounds;
+}
+
+void Plant::is_being_eaten(float impact)
+{
+    health -= impact;
 }
