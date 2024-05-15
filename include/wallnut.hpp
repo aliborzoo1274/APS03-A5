@@ -7,6 +7,5 @@ class Wallnut : public Plant
 {
 public:
     Wallnut(string plant_name, Vector2i pos, vector<float> settings);
-    //~Wallnut();
     void update();
 };

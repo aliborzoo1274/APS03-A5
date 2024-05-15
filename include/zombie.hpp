@@ -7,9 +7,9 @@ class Zombie
 {
 public:
     Zombie(string type, Vector2f pos);
-    //~Zombie();
     void render(RenderWindow &window);
     void update();
+    Vector2f get_pos() {return pos;}
     void is_being_damaged(float hit);
     FloatRect get_rect();
     float get_health() {return health;}

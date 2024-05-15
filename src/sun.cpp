@@ -9,8 +9,6 @@ Sun::Sun(Vector2f p, float s)
     sprite.setTexture(texture);
 }
 
-//Sun::~Sun(){}
-
 void Sun::render(RenderWindow &window)
 {
     window.draw(sprite);

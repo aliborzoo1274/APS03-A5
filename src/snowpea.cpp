@@ -9,8 +9,6 @@ Snowpea::Snowpea(Vector2f p)
     sprite.setScale(0.13, 0.13);
 }
 
-// Snowpea::~Snowpea() {}
-
 void Snowpea::render(RenderWindow &window)
 {
     window.draw(sprite);

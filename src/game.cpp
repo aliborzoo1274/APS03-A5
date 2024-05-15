@@ -1,31 +1,38 @@
 #include "game.hpp"
+#include "handler.hpp"
 
 Game::Game(int width, int height)
 {
   window.create(VideoMode(width, height), "Plants vs. Zombies", Style::Close);
   window.setFramerateLimit(FRAME_RATE);
   state = IN_GAME;
-  //player = new Player(100, 100);
   if (!backgroundTexture.loadFromFile(PICS_PATH + "background.png"))
     error("failed to load background image");
   backgroundSprite.setTexture(backgroundTexture);
-  if (!music.openFromFile(AUDIO_PATH + "pvz.ogg"))
-   error("failed to load music");
-  music.setLoop(true);
-  music.play();
-  //handler = new Handler(player);
+
+  if (!bt.loadFromFile(PICS_PATH + "images.jpeg"))
+    error("failed to load background image");
+  bs.setTexture(bt);
+
+
+
+
+
+  if (!main_music.openFromFile(AUDIO_PATH + "main_music.ogg"))
+   error("failed to load main_music");
+  main_music.setLoop(true);
+  main_music.play();
   handler = new Handler();
 }
 
 Game::~Game()
 {
-    //delete player;
-    delete handler;
+  delete handler;
 }
 
 void Game::run()
 {
-  while (window.isOpen() and state != EXIT)
+  while (window.isOpen())
   {
     update();
     render();
@@ -36,12 +43,10 @@ void Game::run()
 
 void Game::update()
 {
-  Vector2i pos = Mouse::getPosition(window);
   switch (state)
   {
   case (IN_GAME):
-    //player->update(pos);
-    handler->update();
+    state = handler->update();
     break;
   case (VICTORY_SCREEN):
     break;
@@ -57,12 +62,27 @@ void Game::render()
   {
   case (IN_GAME):
     window.draw(backgroundSprite);
-    // player->render(window);
     handler->render(window);
     break;
   case (VICTORY_SCREEN):
+    if (!font.loadFromFile(FONTS_PATH + "Digital-Serial-ExtraBold Regular.ttf"))
+        error("failed to load Digital-Serial-ExtraBold Regular font");
+    text.setFont(font);
+    text.setCharacterSize(40);
+    text.setFillColor(Color::White);
+    text.setPosition(120.f, 120.f);
+    text.setString("\t\t\t\t\tVICTORY!\n\nTHERE IS NOT ZOMBIE ON YOUR LAWN!");
+    window.draw(text);
     break;
   case (GAMEOVER_SCREEN):
+    if (!font.loadFromFile(FONTS_PATH + "jorvik.ttf"))
+        error("failed to load jorvik font");
+    text.setFont(font);
+    text.setCharacterSize(40);
+    text.setFillColor(Color::White);
+    text.setPosition(200.f, 200.f);
+    text.setString("THE ZOMBIES ATE YOUR BRAINS!");
+    window.draw(text);
     break;
   }
   window.display();
@@ -77,7 +97,6 @@ void Game::handle_events()
     {
     case (Event::Closed):
       window.close();
-      state = EXIT;
       break;
     case (Event::MouseButtonPressed):
       handle_mouse_press(event);
@@ -96,7 +115,6 @@ void Game::handle_mouse_press(Event ev)
   switch (state)
   {
   case (IN_GAME):
-    //player->handle_mouse_press(pos);
     handler->handle_mouse_press(pos);
     break;
   case (VICTORY_SCREEN):

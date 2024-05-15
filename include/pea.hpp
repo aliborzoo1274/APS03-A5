@@ -6,7 +6,6 @@ class Pea
 {
 public:
     Pea(Vector2f pos);
-    //~Pea();
     void render(RenderWindow &window);
     void update();
     bool is_out();

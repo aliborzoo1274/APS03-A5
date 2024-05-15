@@ -1,16 +1,14 @@
 #pragma once
 
 #include "global.hpp"
-//#include "player.hpp"
-//#include "projectile.hpp"
-#include "handler.hpp"
+
+class Handler;
 
 enum State
 {
   IN_GAME,
   VICTORY_SCREEN,
   GAMEOVER_SCREEN,
-  EXIT
 };
 
 class Game
@@ -22,14 +20,14 @@ public:
     RenderWindow window;
 private:
     State state;
-    Texture backgroundTexture;
-    Sprite backgroundSprite;
+    Texture backgroundTexture, bt;
+    Sprite backgroundSprite, bs;
     Handler* handler;
-    //Player* player
-    Music music;
+    Music main_music;
+    Font font;
+    Text text;
     void update();
     void render();
     void handle_events();
     void handle_mouse_press(Event ev);
-    void handle_mouse_release(Event ev);
 };

@@ -15,7 +15,6 @@ public:
     void is_being_eaten(float impact);
     float get_health() {return health;}
 private:
-    //Clock clock;
     Texture texture;
     Sprite sprite;
     float damage, health, cooldown;

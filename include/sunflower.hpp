@@ -9,7 +9,6 @@ class Sunflower : public Plant
 public:
     Sunflower(string plant_name, Vector2i pos, vector<float> settings);
     void update();
-    //~Sunflower();
     Vector2f make_sun();
 private:
     Clock clock;

@@ -1,23 +1,46 @@
 #include "handler.hpp"
 
-// Handler::Handler (Player* p){
-//     player = p;
-// }
-
-// Handler::~Handler(){
-//     for(auto p : projectiles){
-//         delete p;
-//     }
-//     for(auto z : zombies){
-//         delete z;
-//     }
-// }
-
-void Handler::update()
+Handler::~Handler()
 {
+    for(auto p : peas)
+    {
+        delete p;
+    }
+    for(auto s : snowpeas)
+    {
+        delete s;
+    }
+    for(auto p : plants)
+    {
+        delete p;
+    }
+    for(auto s : suns)
+    {
+        delete s;
+    }
+    for(auto t : tiles)
+    {
+        delete t;
+    }
+    for(auto z : zombies)
+    {
+        delete z;
+    }
+}
+
+void Handler::game_ending()
+{
+    state = IN_GAME;
     int num_of_new_attackers;
-    float time_of_add_a_zombie;
     float elapsed_time = game_clock.getElapsedTime().asSeconds();
+    for(auto z : zombies)
+    {
+        if(z->get_pos().x < 30)
+        {
+            state = GAMEOVER_SCREEN;
+            return;
+        }
+    }
     if (elapsed_time < game_total_time)
     {
         int round_num = floor(elapsed_time / time_of_each_round);
@@ -31,7 +54,16 @@ void Handler::update()
             add_zombie();
         add_another_zombie = false;
         time_of_add_a_zombie = 0;
+        if (num_of_total_zombies == num_of_dead_zombies)
+            state = VICTORY_SCREEN;
     }
+}
+
+State Handler::update()
+{
+    game_ending();
+    if (state == VICTORY_SCREEN || state == GAMEOVER_SCREEN)
+        return state;
     Time pelapsed = pea_clock.getElapsedTime();
     if(pelapsed.asSeconds() >= game_settings.Peashooter[3])
     {
@@ -66,8 +98,6 @@ void Handler::update()
     for(auto s : suns)
         s->update();
     board.update();
-    // for(auto p : plants)
-    //     p->update();
     for(auto p : plants)
     {
         Sunflower* sunflower = dynamic_cast<Sunflower*>(p);
@@ -80,6 +110,22 @@ void Handler::update()
     }
     delete_out_of_bounds();
     handle_collision();
+    return state;
+}
+
+void Handler::render(RenderWindow &window)
+{
+    board.render_board(window);
+    for(auto p : plants)
+        p->render(window);
+    for(auto p : peas)
+        p->render(window);
+    for(auto s : snowpeas)
+        s->render(window);
+    for(auto z : zombies)
+        z->render(window);
+    for(auto s : suns)
+        s->render(window);
 }
 
 void Handler::delete_out_of_bounds()
@@ -105,21 +151,6 @@ void Handler::delete_out_of_bounds()
         [](auto s){ return s->is_out(); }), snowpeas.end());
     for (auto s : s_trash)
         delete s;
-}
-
-void Handler::render(RenderWindow &window)
-{
-    board.render_board(window);
-    for(auto p : plants)
-        p->render(window);
-    for(auto p : peas)
-        p->render(window);
-    for(auto s : snowpeas)
-        s->render(window);
-    for(auto z : zombies)
-        z->render(window);
-    for(auto s : suns)
-        s->render(window);
 }
 
 void Handler::add_pea()
@@ -358,7 +389,6 @@ void Handler::handle_pressing_plant(Vector2i pos)
         }
         plants[plants.size() - 1]->set_position(pos);
         tiles.push_back(plants[plants.size() - 1]->get_tile());
-        //tiles[tiles.size() - 1]->full_of_plant = true;
         mouse_clicked = true;
     }
 }

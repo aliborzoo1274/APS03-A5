@@ -20,8 +20,6 @@ Zombie::Zombie(string t, Vector2f p)
     }
 }
 
-//Zombie::~Zombie(){}
-
 void Zombie::render(RenderWindow &window)
 {
     string zombie_type = type;

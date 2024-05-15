@@ -9,8 +9,6 @@ Pea::Pea(Vector2f p)
     sprite.setScale(0.13, 0.13);
 }
 
-// Pea::~Pea() {}
-
 void Pea::render(RenderWindow &window)
 {
     window.draw(sprite);

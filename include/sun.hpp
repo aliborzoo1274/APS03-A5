@@ -6,7 +6,6 @@ class Sun
 {
 public:
     Sun(Vector2f pos, float speed);
-    //~Sun();
     void render(RenderWindow &window);
     void update();
     bool is_in_mouse_pos(Vector2i pos);

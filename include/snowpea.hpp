@@ -6,7 +6,6 @@ class Snowpea
 {
 public:
     Snowpea(Vector2f pos);
-    //~Snowpea();
     void render(RenderWindow &window);
     void update();
     bool is_out();
