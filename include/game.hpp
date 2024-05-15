@@ -20,8 +20,8 @@ public:
     RenderWindow window;
 private:
     State state;
-    Texture backgroundTexture, bt;
-    Sprite backgroundSprite, bs;
+    Texture backgroundTexture;
+    Sprite backgroundSprite;
     Handler* handler;
     Music main_music;
     Font font;

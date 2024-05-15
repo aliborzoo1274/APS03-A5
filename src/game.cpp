@@ -9,15 +9,6 @@ Game::Game(int width, int height)
   if (!backgroundTexture.loadFromFile(PICS_PATH + "background.png"))
     error("failed to load background image");
   backgroundSprite.setTexture(backgroundTexture);
-
-  if (!bt.loadFromFile(PICS_PATH + "images.jpeg"))
-    error("failed to load background image");
-  bs.setTexture(bt);
-
-
-
-
-
   if (!main_music.openFromFile(AUDIO_PATH + "main_music.ogg"))
    error("failed to load main_music");
   main_music.setLoop(true);
