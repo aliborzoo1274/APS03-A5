@@ -16,16 +16,21 @@
 void Handler::update()
 {
     int num_of_new_attackers;
+    float time_of_add_a_zombie;
     float elapsed_time = game_clock.getElapsedTime().asSeconds();
     if (elapsed_time < game_total_time)
     {
         int round_num = floor(elapsed_time / time_of_each_round);
         num_of_new_attackers = (round_num * num_of_added_attackers) +
                                 num_of_attackers_in_first_round;
+        time_of_add_a_zombie = time_of_each_round / num_of_new_attackers;
     }
     else
     {
-
+        if (add_another_zombie)
+            add_zombie();
+        add_another_zombie = false;
+        time_of_add_a_zombie = 0;
     }
     Time pelapsed = pea_clock.getElapsedTime();
     if(pelapsed.asSeconds() >= game_settings.Peashooter[3])
@@ -40,18 +45,12 @@ void Handler::update()
         add_snowpea();
     }
     Time zelapsed = zombie_clock.getElapsedTime();
-    if(zelapsed.asSeconds() >= (time_of_each_round / num_of_new_attackers))
+    if(time_of_add_a_zombie != 0 && zelapsed.asSeconds() >= time_of_add_a_zombie)
     {
         zombie_clock.restart();
         num_of_total_zombies++;
         add_zombie();
     }
-    // Time telapsed = titan_clock.getElapsedTime();
-    // if(telapsed.asSeconds() >= 5)
-    // {
-    //     titan_clock.restart();
-    //     add_titan();
-    // }
     Time selapsed = sun_clock.getElapsedTime();
     if(selapsed.asSeconds() >= game_settings.Sun[1])
     {
@@ -64,8 +63,6 @@ void Handler::update()
         s->update();
     for(auto z : zombies)
         z->update();
-    // for(auto t : titans)
-    //     t->update();
     for(auto s : suns)
         s->update();
     board.update();
@@ -119,8 +116,6 @@ void Handler::render(RenderWindow &window)
         p->render(window);
     for(auto s : snowpeas)
         s->render(window);
-    // for(auto t : titans)
-    //     t->render(window);
     for(auto z : zombies)
         z->render(window);
     for(auto s : suns)
@@ -134,8 +129,16 @@ void Handler::add_pea()
         Peashooter* peashooter = dynamic_cast<Peashooter*>(p);
         if (peashooter != nullptr)
         {
-            Pea* pea = new Pea(peashooter->get_pea_pos());
-            peas.push_back(pea);
+            for (auto z : zombies)
+            {
+                FloatRect z_rect = z->get_rect();
+                FloatRect direction = peashooter->zombie_available();
+                if(z_rect.intersects(direction))
+                {
+                    Pea* pea = new Pea(peashooter->get_pea_pos());
+                    peas.push_back(pea);
+                }
+            }
         }
     }
 }
@@ -147,8 +150,16 @@ void Handler::add_snowpea()
         Snowpeashooter* snowpeashooter = dynamic_cast<Snowpeashooter*>(p);
         if (snowpeashooter != nullptr)
         {
-            Snowpea* snowpea = new Snowpea(snowpeashooter->get_snowpea_pos());
-            snowpeas.push_back(snowpea);
+            for (auto z : zombies)
+            {
+                FloatRect z_rect = z->get_rect();
+                FloatRect direction = snowpeashooter->zombie_available();
+                if(z_rect.intersects(direction))
+                {
+                    Snowpea* snowpea = new Snowpea(snowpeashooter->get_snowpea_pos());
+                    snowpeas.push_back(snowpea);
+                }
+            }
         }
     }
 }
@@ -174,14 +185,6 @@ void Handler::add_zombie()
     Zombie* z = new Zombie(type ,Vector2f(WIDTH, location));
     zombies.push_back(z);
 }
-
-// void Handler::add_titan()
-// {
-//     uniform_int_distribution<int> dist(0, 4);
-//     int random_number = dist(rng);
-//     Titan* t = new Titan(Vector2f(WIDTH, random_number * 100 - 44));
-//     titans.push_back(t);
-// }
 
 void Handler::add_sun(Vector2f pos)
 {

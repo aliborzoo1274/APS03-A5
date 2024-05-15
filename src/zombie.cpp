@@ -56,10 +56,21 @@ void Zombie::update()
 
 FloatRect Zombie::get_rect()
 {
-    float width = sprite.getGlobalBounds().width / 4.f;
-    float height = sprite.getGlobalBounds().height / 4.f;
-    float left = sprite.getGlobalBounds().left + (width / 2);
-    float top = sprite.getGlobalBounds().top + (height * 2);
+    float width, height, left, top;
+    if (type == "zombie")
+    {
+        width = sprite.getGlobalBounds().width / 4.f;
+        height = sprite.getGlobalBounds().height / 2.f;
+        left = sprite.getGlobalBounds().left + (width / 2);
+        top = sprite.getGlobalBounds().top + (height);
+    }
+    else
+    {
+        width = sprite.getGlobalBounds().width / 4.f;
+        height = sprite.getGlobalBounds().height / 3.5f;
+        left = sprite.getGlobalBounds().left + (width / 2);
+        top = sprite.getGlobalBounds().top + (height * 7 / 3);
+    }
     FloatRect bounds(left, top, width, height);
     return bounds;
 }

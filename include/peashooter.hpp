@@ -10,4 +10,5 @@ public:
     //~Peashooter();
     void update();
     Vector2f get_pea_pos();
+    FloatRect zombie_available();
 };

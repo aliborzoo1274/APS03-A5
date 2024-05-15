@@ -53,6 +53,7 @@ private:
     void add_snowpea();
     void delete_out_of_bounds();
     void add_zombie();
+    bool add_another_zombie = true;
     //void add_titan();
     void add_sun(Vector2f pos);
     void handle_collision();

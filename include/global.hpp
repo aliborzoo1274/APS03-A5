@@ -17,8 +17,8 @@ using namespace std;
 const int WIDTH = 912;
 const int HEIGHT = 600;
 const int FRAME_RATE = 144;
-const int SCORE_INCREASE = 1000;
-const int SUNFLOWER_SUN_MAKE_TIME = 4;
+const int SCORE_INCREASE = 25;
+const int SUNFLOWER_SUN_MAKE_TIME = 10;
 
 const float TILE_HEIGHT = 95;
 const float TILE_WIDTH = 80;

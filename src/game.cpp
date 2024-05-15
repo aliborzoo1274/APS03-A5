@@ -97,7 +97,6 @@ void Game::handle_mouse_press(Event ev)
   {
   case (IN_GAME):
     //player->handle_mouse_press(pos);
-    //cout << pos.x << ' ' << pos.y << endl;
     handler->handle_mouse_press(pos);
     break;
   case (VICTORY_SCREEN):

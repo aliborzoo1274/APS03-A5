@@ -1,4 +1,4 @@
-ZOMBIES: regular-10-50-0.5-0.5, hairMetalGargantuar-20-80-6-0.1
-PLANTS: peashooter-5-40-1-1-7-100, snowpeashooter-8-200-1-5-5-175, sunflower-0-30-1-12-0-50, wallnut-0-200-1-0-0-50
-ATTACKS: 100-10-3-1
-SUN: 0.5-1
+ZOMBIES: regular-10-50-0.5-0.14, hairMetalGargantuar-20-80-6-0.1
+PLANTS: peashooter-5-40-1-1-3-100, snowpeashooter-8-200-1-1-3-175, sunflower-0-30-1-12-0-50, wallnut-0-200-1-0-0-50
+ATTACKS: 60-10-1-1
+SUN: 0.5-6

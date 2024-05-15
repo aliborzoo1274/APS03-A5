@@ -10,4 +10,5 @@ public:
     //~Snowpeashooter();
     void update();
     Vector2f get_snowpea_pos();
+    FloatRect zombie_available();
 };
