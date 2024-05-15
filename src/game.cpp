@@ -6,8 +6,8 @@ Game::Game(int width, int height)
   window.setFramerateLimit(FRAME_RATE);
   state = IN_GAME;
   //player = new Player(100, 100);
-  if (!backgroundTexture.loadFromFile(PICS_PATH + "bg.png"))
-    error("failed to load image");
+  if (!backgroundTexture.loadFromFile(PICS_PATH + "background.png"))
+    error("failed to load background image");
   backgroundSprite.setTexture(backgroundTexture);
   if (!music.openFromFile(AUDIO_PATH + "pvz.ogg"))
    error("failed to load music");

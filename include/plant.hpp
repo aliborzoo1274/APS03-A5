@@ -11,6 +11,7 @@ public:
     virtual void update() = 0;
     void render(RenderWindow &window);
     Tile* get_tile() {return tile;}
+    FloatRect get_rect();
 private:
     //Clock clock;
     Texture texture;

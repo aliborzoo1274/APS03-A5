@@ -20,3 +20,8 @@ void Titan::update()
     pos.x -= speed;
     sprite.setPosition(pos);
 }
+
+void Titan::damage(float hit)
+{
+    health -= hit;
+}

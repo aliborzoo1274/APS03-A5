@@ -1,4 +1,4 @@
-#include "sunrise.hpp"
+#include "sun.hpp"
 
 Sun::Sun(Vector2f p, float s)
 {
@@ -7,7 +7,6 @@ Sun::Sun(Vector2f p, float s)
     if (!texture.loadFromFile(PICS_PATH + "sun.png"))
         error("failed to load sun texture");
     sprite.setTexture(texture);
-    //sprite.setScale(0.23f, 0.23f);
 }
 
 //Sun::~Sun(){}

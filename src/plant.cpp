@@ -34,3 +34,8 @@ void Plant::render(RenderWindow &window)
 {
     window.draw(sprite);
 }
+
+FloatRect Plant::get_rect()
+{
+    return sprite.getGlobalBounds();
+}

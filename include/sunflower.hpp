@@ -2,7 +2,7 @@
 
 #include "global.hpp"
 #include "plant.hpp"
-#include "sunrise.hpp"
+#include "sun.hpp"
 
 class Sunflower : public Plant
 {

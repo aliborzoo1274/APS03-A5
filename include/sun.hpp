@@ -11,7 +11,6 @@ public:
     void update();
     bool is_in_mouse_pos(Vector2i pos);
 private: 
-    Clock clock;
     float speed;
     Texture texture;
     Sprite sprite;

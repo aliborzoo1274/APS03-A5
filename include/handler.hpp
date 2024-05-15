@@ -6,7 +6,7 @@
 //#include "projectile.hpp"
 #include "zombie.hpp"
 #include "titan.hpp"
-#include "sunrise.hpp"
+#include "sun.hpp"
 #include "board.hpp"
 #include "plant.hpp"
 #include "peashooter.hpp"
@@ -48,5 +48,7 @@ private:
     void add_zombie();
     void add_titan();
     void add_sun(Vector2f pos);
-    //void handle_collision();
+    void handle_collision();
+    void handle_collision_of_zombie_and_projectile();
+    void handle_collision_of_zombie_and_plant();
 };

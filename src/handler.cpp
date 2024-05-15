@@ -69,7 +69,7 @@ void Handler::update()
         }
     }
     delete_out_of_bounds();
-    //handle_collision();
+    handle_collision();
 }
 
 void Handler::delete_out_of_bounds()
@@ -172,32 +172,87 @@ void Handler::add_sun(Vector2f pos)
     }
 }
 
-// void Handler::handle_collision(){
-//     vector <Projectile*> trashp;
-//     vector <Zombie*> trashz;
-//     for(auto p : projectiles)
-//     {
-//         for(auto z : zombies)
-//         {
-//             FloatRect z_rect = z->get_rect();
-//             FloatRect p_rect = p->get_rect();
-//             if(z_rect.intersects(p_rect)){
-//                 trashp.push_back(p);
-//                 trashz.push_back(z);
-//             }
-//         }   
-//     }
-//     for(auto p : trashp)
-//     {
-//         projectiles.erase(remove(projectiles.begin(), projectiles.end(), p), projectiles.end());   
-//         delete p;
-//     }
-//     for(auto z : trashz)
-//     {
-//         zombies.erase(remove(zombies.begin(), zombies.end(), z), zombies.end());   
-//         delete z;
-//     }
-// }
+void Handler::handle_collision()
+{
+    handle_collision_of_zombie_and_projectile();
+    handle_collision_of_zombie_and_plant();
+}
+
+void Handler::handle_collision_of_zombie_and_projectile()
+{
+    vector<Pea*> trashp;
+    vector<Snowpea*> trash_snp;
+    vector<Zombie*> trashz;
+    for(auto p : peas)
+    {
+        for(auto z : zombies)
+        {
+            FloatRect z_rect = z->get_rect();
+            FloatRect p_rect = p->get_rect();
+            if(z_rect.intersects(p_rect))
+            {
+                trashp.push_back(p);
+                z->damage(p->get_damage());
+                if(z->get_health() <= 0)
+                    trashz.push_back(z);
+            }
+        }   
+    }
+    for(auto s : snowpeas)
+    {
+        for(auto z : zombies)
+        {
+            FloatRect z_rect = z->get_rect();
+            FloatRect s_rect = s->get_rect();
+            if(z_rect.intersects(s_rect))
+            {
+                trash_snp.push_back(s);
+                z->freeze();
+                z->damage(s->get_damage());
+                if(z->get_health() <= 0)
+                    trashz.push_back(z);
+            }
+        }   
+    }
+    for(auto p : trashp)
+    {
+        peas.erase(remove(peas.begin(), peas.end(), p), peas.end());   
+        delete p;
+    }
+    for(auto s : trash_snp)
+    {
+        snowpeas.erase(remove(snowpeas.begin(), snowpeas.end(), s), snowpeas.end());   
+        delete s;
+    }
+    for(auto z : trashz)
+    {
+        zombies.erase(remove(zombies.begin(), zombies.end(), z), zombies.end());   
+        delete z;
+    }
+}
+
+void Handler::handle_collision_of_zombie_and_plant()
+{
+    for(auto p : plants)
+    {
+        for(auto z : zombies)
+        {
+            FloatRect z_rect = z->get_rect();
+            FloatRect p_rect = p->get_rect();
+            if(z_rect.intersects(p_rect))
+            {
+
+                
+
+
+                // trashp.push_back(p);
+                // z->damage(p->get_damage());
+                // if(z->get_health() <= 0)
+                //     trashz.push_back(z);
+            }
+        }   
+    }
+}
 
 void Handler::handle_mouse_press(Vector2i pos)
 {
